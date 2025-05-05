@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiskelukaveri</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Opiskelukaveri</h1>
+        <div class="language-switcher">
+            <button id="fi">FI</button>
+            <button id="en">EN</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="calendar-section">
+            <h2 data-translate="calendar">Kalenteri</h2>
+            <div class="mini-calendar" id="calendar"></div>
+        </section>
+
+        <section class="todo-section">
+            <h2 data-translate="tasks">Tehtävät</h2>
+            <form id="todo-form">
+                <input type="text" id="todo-input" placeholder="Lisää uusi tehtävä..." required>
+                <input type="date" id="todo-date">
+                <button type="submit" data-translate="add">Lisää</button>
+            </form>
+            <ul id="todo-list"></ul>
+        </section>
+
+        <section class="materials-section">
+            <h2 data-translate="materials">Materiaalit</h2>
+            <form id="material-form">
+                <input type="text" id="material-title" placeholder="Materiaalin otsikko..." required>
+                <input type="url" id="material-link" placeholder="Linkki (jos saatavilla)">
+                <textarea id="material-notes" placeholder="Muistiinpanot..."></textarea>
+                <button type="submit" data-translate="add-material">Lisää materiaali</button>
+            </form>
+            <div id="materials-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-translate="footer">Opiskelukaveri - Sinun opiskeluaikasi apuri</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
