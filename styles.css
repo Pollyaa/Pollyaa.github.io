@@ -6,6 +6,7 @@
   --dark-color: #2c3e50;
 }
 
+/* Perustyyli kaikille elementeille */
 * {
   margin: 0;
   padding: 0;
@@ -16,16 +17,23 @@
 body {
   background-color: var(--light-color);
   color: var(--dark-color);
-  line-height: 1.6;
   padding: 20px;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
+body.dark {
+  background-color: #17142b;
+  color: #e0e0e0;
+}
+
+/* Ylätunniste */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   border-bottom: 2px solid var(--secondary-color);
 }
 
@@ -34,12 +42,12 @@ h1, h2 {
 }
 
 .language-switcher button {
-  padding: 5px 10px;
-  margin-left: 5px;
+  margin-left: 10px;
+  padding: 6px 12px;
   background-color: var(--secondary-color);
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -49,13 +57,116 @@ main {
   gap: 30px;
 }
 
-section {
-  background-color: white;
+/* Kalenterin tausta ja blur */
+.calendar-section {
+  background-image: url('https://images.unsplash.com/photo-1588420343618-6141b3784bce?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  position: relative;
+  min-height: 400px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+.calendar-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255,255,255,0.65);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.calendar-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+#calendar {
+  width: 100%;
+  max-width: 100%;
+  background: url('https://images.unsplash.com/photo-1555465910-31f7f20a184d?q=80&w=1890&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  border-radius: 12px;
+  padding: 10px;
+  max-height: 600px; 
+  overflow-y: auto;
+  background-size: cover;  
+  background-position: center;  
+  background-repeat: no-repeat; 
+}
+
+body.dark #calendar {
+  background: #1f1f45;
+}
+body.dark .fc-daygrid-day-number {
+  color: #f0f0f0;
+}
+body.dark .fc-daygrid-day {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #ddd;
+}
+
+body.dark .fc-daygrid-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .fc-day-today {
+  background-color: rgba(243, 156, 18, 0.15) !important;
+  border: 2px solid #f39c12;
+}
+
+body.dark .fc-day-sat .fc-daygrid-day-number,
+body.dark .fc-day-sun .fc-daygrid-day-number {
+  color: #e74c3c !important;
+}
+
+.fc-daygrid-day-number {
+  font-weight: bold;
+}
+
+.fc-day-sat .fc-daygrid-day-number,
+.fc-day-sun .fc-daygrid-day-number {
+  color: #e74c3c;
+}
+
+.fc-daygrid-day {
+  background-color: rgba(0, 0, 0, 0.04); /* светло-серый фон ячеек */
+  color: #222; 
+  transition: background-color 0.3s ease;
+}
+
+.fc-day-today {
+  background-color: rgba(5, 30, 47, 0.15) !important; 
+  border: 3px solid var(--secondary-color);
+}
+
+.fc-daygrid-day:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Teeman vaihtopainikkeet */
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.theme-toggle button {
+  background: var(--secondary-color);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Lomakkeet ja tehtävälista */
 form {
   display: flex;
   flex-direction: column;
@@ -98,6 +209,7 @@ button:hover {
   color: #888;
 }
 
+/* Materiaalilista */
 #materials-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -115,31 +227,21 @@ button:hover {
   margin-bottom: 10px;
   color: var(--primary-color);
 }
-
-.mini-calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+.delete-btn:hover {
+  color: #c0392b;
 }
 
-.calendar-day {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #eee;
-}
-
-.calendar-day.has-event {
-  background-color: var(--secondary-color);
-  color: white;
-}
-
-.calendar-header {
-  grid-column: span 7;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
+/* Alatunniste */
 footer {
   margin-top: 30px;
   text-align: center;
@@ -147,30 +249,77 @@ footer {
   border-top: 2px solid var(--secondary-color);
 }
 
+/* Motivaatiotoast (oikeassa alakulmassa) */
+#motivational-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333; /* oletus jos JS ei toimi */
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  max-width: 300px;
+  z-index: 9999;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+#motivational-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsiivisuus */
 @media (min-width: 768px) {
   main {
-      grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
-  
+
   .calendar-section {
-      grid-column: span 2;
+    grid-column: span 2;
   }
-  
+
   #materials-list {
-      grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (min-width: 1024px) {
   main {
-      grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   
+
   .calendar-section {
-      grid-column: span 3;
+    grid-column: span 3;
   }
-  
+
   #materials-list {
-      grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+
+
+@media (max-width: 500px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .theme-toggle {
+    flex-direction: column;
+    top: 5px;
+    right: 5px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
   }
 }
